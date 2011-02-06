@@ -70,8 +70,8 @@ typedef enum
 #endif
 } simpliciti_mode_t;
 
-// Stop SimpliciTI transmission after 60 seconds to save power
-#define SIMPLICITI_TIMEOUT									(60u)
+// Stop SimpliciTI transmission after 60 minutes to save power
+#define SIMPLICITI_TIMEOUT									(60u * 60)
 
 // Button flags for SimpliciTI data
 #define SIMPLICITI_BUTTON_STAR			(0x10)

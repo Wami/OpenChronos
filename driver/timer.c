@@ -365,9 +365,12 @@ __interrupt void TIMER0_A0_ISR(void)
 			// Clear display
 			clear_display_all();
 			display_sync(LINE2, DISPLAY_LINE_UPDATE_FULL);
+			// Set the timeout to 60 seconds
+			sRFsmpl.timeout = 60u; 
 
 			// sync the time
 			start_simpliciti_sync();
+			sRFsmpl.timeout = SIMPLICITI_TIMEOUT; 
 		}
 
 		#ifdef CONFIG_ALARM
