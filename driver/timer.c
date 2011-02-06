@@ -383,7 +383,7 @@ __interrupt void TIMER0_A0_ISR(void)
 		// Decrement alarm duration counter
 		if (sAlarm.duration-- > 0)
 		{
-			request.flag.buzzer = 1;
+			start_buzzer(16, 1000, 500);
 		}
 		else
 		{
