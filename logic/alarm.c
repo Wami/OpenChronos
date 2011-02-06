@@ -80,7 +80,7 @@ struct alarm sAlarm;
 void reset_alarm(void) 
 {
 	// Default alarm time 06:30
-	sAlarm.hour   = 06;
+	sAlarm.hour   = 20;
 	sAlarm.minute = 30;
 
 	// Alarm is initially off	
