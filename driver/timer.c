@@ -362,6 +362,11 @@ __interrupt void TIMER0_A0_ISR(void)
 		#endif
 		
 		if (sTime.minute == AUTOSYNC_MINUTE && sTime.hour == AUTOSYNC_HOUR) {
+			// Clear display
+			clear_display_all();
+			display_sync(LINE2, DISPLAY_LINE_UPDATE_FULL);
+
+			// sync the time
 			start_simpliciti_sync();
 		}
 
