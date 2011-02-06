@@ -137,7 +137,7 @@ void set_value(s32 * value, u8 digits, u8 blanks, s32 limitLow, s32 limitHigh, u
 	update = 1;
 	
 	// Turn on 200ms button repeat function 
-	button_repeat_on(200);
+	button_repeat_on(50);
 	
 	// Start blinking with with 2Hz
 	set_blink_rate(BIT6 + BIT5);
