@@ -337,6 +337,9 @@ void init_global_variables(void)
 	request.all_flags 	= 0;
 	display.all_flags 	= 0;
 	message.all_flags	= 0;
+
+	// Disable beep by default
+	sys.flag.no_beep = 1;
 	
 	// Force full display update when starting up
 	display.flag.full_update = 1;
