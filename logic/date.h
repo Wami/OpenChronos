@@ -62,6 +62,7 @@ struct date
 	u8  day;
 	u8  month;
 	u16 year;
+	u8  is_weekday;
 };
 extern struct date sDate;
 

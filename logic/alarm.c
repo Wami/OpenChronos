@@ -51,6 +51,7 @@
 // logic
 #include "alarm.h"
 #include "clock.h"
+#include "date.h"
 #include "user.h"
 
 
@@ -103,13 +104,11 @@ void check_alarm(void)
 	
 	// Compare current time and alarm time
 	// Start with minutes - only 1/60 probability to match
-	if (sTime.minute == sAlarm.minute)
+	if ((sTime.minute == sAlarm.minute && sTime.hour == sAlarm.hour) ||
+			(sDate.is_weekday == 1 && sTime.minute == ALARM_WEEKDAY_MIN && sTime.hour == ALARM_WEEKDAY_HOUR))
 	{
-		if (sTime.hour == sAlarm.hour)
-		{
-			// Indicate that alarm is beeping
-			sAlarm.state = ALARM_ON;
-		}
+		// Indicate that alarm is beeping
+		sAlarm.state = ALARM_ON;
 	}
 }	
 

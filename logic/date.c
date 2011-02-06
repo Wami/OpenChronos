@@ -328,6 +328,11 @@ void display_date(line_t line, update_t update)
 					break;
 				}
 				skew = skew%7;
+				if (skew >= 1 && skew <=5) {
+					sDate.is_weekday = 1;
+				} else {
+					sDate.is_weekday = 0;
+				}
 				str = (u8 *)weekDayStr[skew];
 				display_chars(switch_seg(line, LCD_SEG_L1_3_2, LCD_SEG_L2_4_2), str, SEG_ON);
 				display_symbol(switch_seg(line, LCD_SEG_L1_DP1, LCD_SEG_L2_DP), SEG_ON);
