@@ -603,6 +603,9 @@ int simpliciti_get_rvc_callback(u8 len)
 // *************************************************************************************************
 void start_simpliciti_sync(void)
 {
+	// Exit if battery voltage is too low for radio operation
+	if (sys.flag.low_battery) return;
+
   	// Clear LINE1
 	//clear_line(LINE1);
 	//fptr_lcd_function_line1(LINE1, DISPLAY_LINE_CLEAR);

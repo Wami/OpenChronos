@@ -361,6 +361,10 @@ __interrupt void TIMER0_A0_ISR(void)
 		request.flag.voltage_measurement = 1;
 		#endif
 		
+		if (sTime.minute == AUTOSYNC_MINUTE && sTime.hour == AUTOSYNC_HOUR) {
+			start_simpliciti_sync();
+		}
+
 		#ifdef CONFIG_ALARM
 		// If the chime is enabled, we beep here
 		if (sTime.minute == 0) {
