@@ -85,8 +85,8 @@ void reset_alarm(void)
 
 	// Alarm is initially off	
 	sAlarm.duration = ALARM_ON_DURATION;
-	sAlarm.state 	= ALARM_DISABLED;
-	sAlarm.hourly 	= ALARM_DISABLED;
+	sAlarm.state 	= ALARM_ENABLED;
+	sAlarm.hourly 	= ALARM_ENABLED;
 }
 
 
