@@ -319,7 +319,13 @@ __interrupt void PORT2_ISR(void)
 		#endif
 		if (!sys.flag.up_down_repeat_enabled && !sys.flag.no_beep)
 		{
-			start_buzzer(1, CONV_MS_TO_TICKS(20), CONV_MS_TO_TICKS(150));
+			int i;
+			for (i = 9; i >= 1; i--) {
+				start_buzzer_steps(1, CONV_MS_TO_TICKS(20), CONV_MS_TO_TICKS(20), i);
+				while (is_buzzer()) {
+					idle_loop();
+				}
+			}
 		}
 		
 		// Debounce delay 2
