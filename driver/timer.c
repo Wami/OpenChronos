@@ -374,7 +374,17 @@ __interrupt void TIMER0_A0_ISR(void)
 		// If the chime is enabled, we beep here
 		if (sTime.minute == 0) {
 			if (sAlarm.hourly == ALARM_ENABLED) {
-				start_buzzer(16, 1000, 500);
+				float tune[6] = {6.827998, 6.827998, 7.7896995, 6.827998, 5.5825, 6.827998};
+				float rest_timing[6] = {175, 175, 50, 175, 175, 1};
+				float note_timing[6] = {75, 75, 75, 75, 75, 75};
+				u8 i;
+				for (i = 0; i < sizeof(tune) / sizeof(float); i++) {
+					start_buzzer_steps(1, CONV_MS_TO_TICKS(note_timing[i]), CONV_MS_TO_TICKS(rest_timing[i]), tune[i]);
+					while (is_buzzer()) {
+						idle_loop();
+					}
+				}
+				display.flag.line1_full_update = 1;
 			}
 		}
 		// Check if alarm needs to be turned on
