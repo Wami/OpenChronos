@@ -299,7 +299,7 @@ void mx_altitude(u8 line)
 
 	// Limits for set_value function
 	limit_low = -100;
-	limit_high = 4000;
+	limit_high = 7000;
 #else
 	if (sys.flag.use_metric_units)
 	{
@@ -311,7 +311,7 @@ void mx_altitude(u8 line)
 
 		// Limits for set_value function
 		limit_low = -100;
-		limit_high = 4000;
+		limit_high = 7000;
 	}
 	else // English units
 	{
