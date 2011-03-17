@@ -58,8 +58,14 @@ extern void display_altitude(u8 line, u8 update);
 // *************************************************************************************************
 // Defines section
 
+// Defines section
+#ifndef USE_8h_TIMEOUT
 // Stop altitude measurement after 60 minutes to save battery
-#define ALTITUDE_MEASUREMENT_TIMEOUT	(60*60u)
+	#define ALTITUDE_MEASUREMENT_TIMEOUT	(60*60u)
+#else
+	#define ALTITUDE_MEASUREMENT_TIMEOUT	(8*60*60u)
+#endif
+
 
 
 // *************************************************************************************************

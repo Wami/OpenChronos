@@ -104,10 +104,23 @@ DATA["CONFIG_TEST"] = {
         "help": "Test module to test some functionalities when the clock started",
 }
 
+
+###IMPLEMENTED Wami 03.2011
+DATA["DONT_USE_FILTER"] = {
+        "name": "Don't use altitude measurment filter",
+        "depends": [],
+        "default": True}
+DATA["USE_8h_TIMEOUT"] = {
+        "name": "Use 8 hour timeout for altitude measurment",
+        "depends": [],
+        "default": True}
+
+
 DATA["TEXT_MODULES"] = {
         "name": "Modules",
         "type": "info"
 }
+
 
 #### MODULES ####
 
@@ -230,11 +243,8 @@ DATA["CONFIG_USE_GPS"] = {
 	"depends": [],
 	"default": False}
 
-###IMPLEMENTED Wami 03.2011
-DATA["DONT_USE_FILTER"] = {
-        "name": "Don't use altitude measurment filter",
-        "depends": [],
-        "default": True}
+
+
 
 HEADER = """
 #ifndef _CONFIG_H_
