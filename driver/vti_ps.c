@@ -47,6 +47,7 @@
 #include "timer.h"
 #ifdef FIXEDPOINT
 #include "dsp.h"
+
 #endif
 
 
@@ -583,8 +584,7 @@ void update_pressure_table(s16 href, u32 p_meas, u16 t_meas)
 	// The <<16 and >>1 operations correct for the 15bit scale of f.
 #endif
 }
-#ifndef ALT1_PA_2_METER
-#ifndef FIXEDPOINT
+
 // *************************************************************************************************
 // @fn          conv_pa_to_meter
 // @brief       Convert pressure (Pa) to altitude (m) using a conversion table
@@ -593,6 +593,22 @@ void update_pressure_table(s16 href, u32 p_meas, u16 t_meas)
 //				u16		t_meas	Temperature (10*°K)
 // @return      s16				Altitude (m)
 // *************************************************************************************************
+
+#ifdef ALT1_PA_2_METER
+//Alternative method 1 by Valera K
+s16 conv_pa_to_meter(u32 p_meas, s16 altitude_offset)
+{
+    volatile s16 h;
+    volatile float rawAltitude;
+    volatile float fl_p_meas;
+    volatile float pressureFactor = 1/5.25588;
+    fl_p_meas = (float) p_meas;  
+    rawAltitude = 44330 * (1 - pow((fl_p_meas/101325.0), pressureFactor));
+    h=(s16)rawAltitude + altitude_offset;
+    return (h);
+}
+#else
+#ifndef FIXEDPOINT
 s16 conv_pa_to_meter(u32 p_meas, u16 t_meas)
 {
 	const float coef2  = 0.0007;
@@ -602,7 +618,7 @@ s16 conv_pa_to_meter(u32 p_meas, u16 t_meas)
 	volatile float p_low;
 	volatile float fl_h;
 	volatile s16 h;
-	u8 i;
+	u8 i; 
 
 	// Typecast arguments
 	volatile float fl_p_meas = (float)p_meas/100;	// Convert from Pa to hPa
@@ -724,18 +740,4 @@ s16 conv_pa_to_altitude(u32 p_meas, u16 t_meas)
 	}
 }
 #endif // FIXEDPOINT
-#else //ALT1_PA_2_METER
-
-//Alternative method 1 by Valera K
-s16 conv_pa_to_meter(u32 p_meas, s16 altitude_offset)
-{
-    volatile s16 h;
-    volatile float rawAltitude;
-    volatile float fl_p_meas;
-    volatile float pressureFactor = 1/5.25588;
-    fl_p_meas = (float) p_meas;  
-    rawAltitude = 44330 * (1 - pow((fl_p_meas/101325.0), pressureFactor));
-    h=(s16)rawAltitude + altitude_offset;
-    return (h);
-}
-#ifndef //ALT1_PA_2_METER
+#endif //ALT1_PA_2_METER
