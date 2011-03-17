@@ -118,7 +118,10 @@ DATA["DONT_USE_FILTER_FOR_VARIO"] = {
         "name": "Don't use filter for vario",
         "depends": [],
         "default": True}
-
+DATA["ALT1_PA_2_METER"] = {
+        "name": "Use alternative altitute calculation (Valera K)",
+        "depends": [],
+        "default": True}
 
 
 

@@ -583,7 +583,7 @@ void update_pressure_table(s16 href, u32 p_meas, u16 t_meas)
 	// The <<16 and >>1 operations correct for the 15bit scale of f.
 #endif
 }
-
+#ifndef ALT1_PA_2_METER
 #ifndef FIXEDPOINT
 // *************************************************************************************************
 // @fn          conv_pa_to_meter
@@ -724,3 +724,18 @@ s16 conv_pa_to_altitude(u32 p_meas, u16 t_meas)
 	}
 }
 #endif // FIXEDPOINT
+#else //ALT1_PA_2_METER
+
+//Alternative method 1 by Valera K
+s16 conv_pa_to_meter(u32 p_meas, s16 altitude_offset)
+{
+    volatile s16 h;
+    volatile float rawAltitude;
+    volatile float fl_p_meas;
+    volatile float pressureFactor = 1/5.25588;
+    fl_p_meas = (float) p_meas;  
+    rawAltitude = 44330 * (1 - pow((fl_p_meas/101325.0), pressureFactor));
+    h=(s16)rawAltitude + altitude_offset;
+    return (h);
+}
+#ifndef //ALT1_PA_2_METER
