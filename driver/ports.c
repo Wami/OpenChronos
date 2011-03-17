@@ -350,7 +350,7 @@ __interrupt void PORT2_ISR(void)
   	
   	// ---------------------------------------------------
   	// Safe long button event detection
-  	if(button.flag.star || button.flag.num) 
+  	if(button.flag.star || button.flag.num || button.flag.up || button.flag.down || button.flag.backlight) 
 	{
 		// Additional debounce delay to enable safe high detection
 		Timer0_A4_Delay(CONV_MS_TO_TICKS(BUTTONS_DEBOUNCE_TIME_LEFT));
@@ -358,6 +358,10 @@ __interrupt void PORT2_ISR(void)
 		// Check if this button event is short enough
 		if (BUTTON_STAR_IS_PRESSED) button.flag.star = 0;
 		if (BUTTON_NUM_IS_PRESSED) button.flag.num = 0;	
+		if (BUTTON_UP_IS_PRESSED) button.flag.up = 0;
+		if (BUTTON_DOWN_IS_PRESSED) button.flag.down = 0;	
+		if (BUTTON_BACKLIGHT_IS_PRESSED) button.flag.backlight = 0;
+
 	}
 	
 	// Reenable PORT2 IRQ
