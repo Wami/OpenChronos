@@ -114,6 +114,12 @@ DATA["USE_8h_TIMEOUT"] = {
         "name": "Use 8 hour timeout for altitude measurment",
         "depends": [],
         "default": True}
+DATA["DONT_USE_FILTER_FOR_VARIO"] = {
+        "name": "Don't use filter for vario",
+        "depends": [],
+        "default": True}
+
+
 
 
 DATA["TEXT_MODULES"] = {

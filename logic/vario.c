@@ -451,11 +451,11 @@ display_vario( u8 line, u8 update )
 	     // negative.
 	     // 
 
-		#ifdef USE_FILTER_FOR_VARIO
+		#ifndef DONT_USE_FILTER_FOR_VARIO
 			#ifdef FIXEDPOINT
-			pressure = (u32)(((pressure * 5) + (G_vario.prev_pa * 5))/10);
+				pressure = (u32)(((pressure * 5) + (G_vario.prev_pa * 5))/10);
 			#else
-			pressure = (u32)((pressure * 0.5) + (G_vario.prev_pa * 0.5));
+				pressure = (u32)((pressure * 0.5) + (G_vario.prev_pa * 0.5));
 			#endif
 			diff = G_vario.prev_pa - pressure;
 		#else
