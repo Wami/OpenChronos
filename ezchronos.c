@@ -568,8 +568,14 @@ void process_requests(void)
 	
 	// Do pressure measurement
 #ifdef CONFIG_ALTITUDE
-  	if (request.flag.altitude_measurement) do_altitude_measurement(FILTER_ON);
+	#ifdef DONT_USE_FILTER
+  		if (request.flag.altitude_measurement) do_altitude_measurement(FILTER_OFF);
+	#else
+		if (request.flag.altitude_measurement) do_altitude_measurement(FILTER_ON);
+	#endif
 #endif
+	
+
 	
 	#ifdef FEATURE_PROVIDE_ACCEL
 	// Do acceleration measurement

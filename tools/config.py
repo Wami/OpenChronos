@@ -230,6 +230,11 @@ DATA["CONFIG_USE_GPS"] = {
 	"depends": [],
 	"default": False}
 
+###IMPLEMENTED Wami 03.2011
+DATA["DONT_USE_FILTER"] = {
+        "name": "Don't use altitude measurment filter",
+        "depends": [],
+        "default": True}
 
 HEADER = """
 #ifndef _CONFIG_H_
