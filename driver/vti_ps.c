@@ -39,6 +39,7 @@
 // *************************************************************************************************
 // Include section
 
+
 // system
 #include "project.h"
 
@@ -596,7 +597,7 @@ void update_pressure_table(s16 href, u32 p_meas, u16 t_meas)
 
 #ifdef ALT1_PA_2_METER
 //Alternative method 1 by Valera K
-s16 conv_pa_to_meter(u32 p_meas, s16 altitude_offset)
+s16 conv_pa_to_meter(u32 p_meas, u16 t_meas)
 {
     volatile s16 h;
     volatile float rawAltitude;
@@ -604,7 +605,7 @@ s16 conv_pa_to_meter(u32 p_meas, s16 altitude_offset)
     volatile float pressureFactor = 1/5.25588;
     fl_p_meas = (float) p_meas;  
     rawAltitude = 44330 * (1 - pow((fl_p_meas/101325.0), pressureFactor));
-    h=(s16)rawAltitude + altitude_offset;
+    h=(s16)rawAltitude;
     return (h);
 }
 #else
