@@ -74,6 +74,7 @@
 #define VARIO_VZ     1 /* 110 bytes - display Vz min/ max     */
 #define VARIO_ALTMAX 1 /*  64 bytes - display max altitude    */
 #define VARIO_F_TIME 1 /* 216 bytes - display flight time     */
+#define VARIO_BLANK  1 /* 0 bytes	- display nothing    */
 //
 // Global struct with all our variables.
 //
@@ -137,6 +138,9 @@ enum
 #if VARIO_F_TIME
    VARIO_VIEWMODE_F_TIME,     // Flight time (since stats reset)
 #endif
+#if VARIO_BLANK
+   VARIO_VIEWMODE_BLANK,     // Blank
+#endif
    VARIO_VIEWMODE_MAX
 };
 
@@ -198,6 +202,9 @@ mx_vario(u8 line)
 #endif
 #if VARIO_F_TIME
       case VARIO_VIEWMODE_F_TIME:
+#endif
+#if VARIO_BLANK
+	  case VARIO_VIEWMODE_BLANK:     
 #endif
 	_clear_stats();
 	break;
@@ -443,7 +450,17 @@ display_vario( u8 line, u8 update )
 	     // buzzer. Pressure decreases with altitude, ensure going lower is
 	     // negative.
 	     // 
-	     diff = G_vario.prev_pa - pressure;
+
+		#ifdef USE_FILTER_FOR_VARIO
+			#ifdef FIXEDPOINT
+			pressure = (u32)(((pressure * 5) + (G_vario.prev_pa * 5))/10);
+			#else
+			pressure = (u32)((pressure * 0.5) + (G_vario.prev_pa * 0.5));
+			#endif
+			diff = G_vario.prev_pa - pressure;
+		#else
+			diff = G_vario.prev_pa - pressure;
+		#endif
 
 #if VARIO_VZ
 	     // update stats as we may want to see these after the flight.
@@ -461,8 +478,19 @@ display_vario( u8 line, u8 update )
 
 	_display_l2_clean();
 	// Pulse the vario heartbeat indicator.
+
+	#if VARIO_BLANK
+	if(G_vario.view_mode!=VARIO_VIEWMODE_BLANK)
+	{
+		++_vbeat;
+		display_symbol( LCD_ICON_RECORD, ( _vbeat & 1 ) ? SEG_ON : SEG_OFF );
+	}
+	else
+		display_symbol( LCD_ICON_RECORD,  SEG_OFF );
+	#else
 	++_vbeat;
 	display_symbol( LCD_ICON_RECORD, ( _vbeat & 1 ) ? SEG_ON : SEG_OFF );
+	#endif
 	
 	// Now see what value to display.
 
@@ -509,6 +537,14 @@ display_vario( u8 line, u8 update )
 	     _display_signed( G_vario.stats.altmax, 0 );
 	     break;
 #endif
+
+#if VARIO_BLANK
+	   case VARIO_VIEWMODE_BLANK:
+		_display_l2_clean();
+		//display_chars(LCD_SEG_L2_5_0, (u8*) " ", SEG_ON);
+		break;
+#endif
+
 #if VARIO_F_TIME
 	   case VARIO_VIEWMODE_F_TIME:
 	     display_chars(LCD_SEG_L2_5_0, itoa(G_vario.stats.f_time.hh,2,0), SEG_ON);
