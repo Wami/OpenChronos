@@ -465,6 +465,17 @@ void wakeup_event(void)
 		// Set display update flag
 		display.flag.full_update = 1;
 	}
+	else if (button.flag.up_long)
+	{
+		// Clear button event
+		button.flag.up_long = 0;
+
+		// Call sub menu function
+		ptrMenu_L1->ax_function(LINE1);
+
+		// Set display update flag
+		display.flag.full_update = 1;
+	}
 	else if (button.flag.num_long)
 	{
 		// Clear button event
@@ -472,6 +483,17 @@ void wakeup_event(void)
 		
 		// Call sub menu function
 		ptrMenu_L2->mx_function(LINE2);
+
+		// Set display update flag
+		display.flag.full_update = 1;	
+	}
+	else if (button.flag.down_long)
+	{
+		// Clear button event
+		button.flag.down_long = 0;
+		
+		// Call sub menu function
+		ptrMenu_L2->ax_function(LINE2);
 
 		// Set display update flag
 		display.flag.full_update = 1;	

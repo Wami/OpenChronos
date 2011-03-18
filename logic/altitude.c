@@ -275,7 +275,21 @@ void sx_altitude(u8 line)
 	// Restarting of altitude measurement will be done by subsequent full display update 
 }
 
-
+// *************************************************************************************************
+// @fn          ax_altitude
+// @brief       long UP button handler, Resets measurment
+// @param       u8 line	LINE1, LINE2
+// @return      none
+// *************************************************************************************************
+void ax_altitude(u8 line)
+{
+	
+	//sAlt.altitude_offset=0;
+	// Restart altitude measurement 
+	//reset_altitude_measurement();
+	sAlt.altitude=0;
+	update_pressure_table(sAlt.altitude, sAlt.pressure, sAlt.temperature);
+}
 // *************************************************************************************************
 // @fn          mx_altitude
 // @brief       Mx button handler to set the altitude offset. 
@@ -351,6 +365,7 @@ void mx_altitude(u8 line)
 
 			break;
 		}
+
 
 		// Set current altitude - offset is set when leaving function
 		set_value(&altitude, 4, 3, limit_low, limit_high, SETVALUE_DISPLAY_VALUE + SETVALUE_FAST_MODE + SETVALUE_DISPLAY_ARROWS, LCD_SEG_L1_3_0, display_value1);
