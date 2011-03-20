@@ -372,6 +372,9 @@ void mx_altitude(u8 line)
 void display_altitude(u8 line, u8 update)
 {
 	u8 * str;
+#ifdef 	CONFIG_ROUND_ALT
+	u32 aalt;
+#endif
 #ifndef CONFIG_METRIC_ONLY
 	s16 ft;
 #endif
@@ -413,7 +416,17 @@ void display_altitude(u8 line, u8 update)
 				// Display altitude in xxxx m format, allow 3 leading blank digits
 				if (sAlt.altitude >= 0)
 				{
+#ifdef 	CONFIG_ROUND_ALT
+					if (sAlt.altitude > 1000)
+					{
+						aalt=sAlt.altitude/50;
+						str = itoa(aalt*50, 4, 3);
+					}
+					else
+						str = itoa(sAlt.altitude, 4, 3);
+#else
 					str = itoa(sAlt.altitude, 4, 3);
+#endif	
 					display_symbol(LCD_SYMB_ARROW_UP, SEG_ON);
 					display_symbol(LCD_SYMB_ARROW_DOWN, SEG_OFF);
 				}

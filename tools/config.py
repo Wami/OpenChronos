@@ -118,7 +118,10 @@ DATA["DONT_USE_FILTER_FOR_VARIO"] = {
         "name": "Don't use filter for vario",
         "depends": [],
         "default": True}
-
+DATA["CONFIG_ROUND_ALT"] = {
+        "name": "Round altitude when higher than 1000m",
+        "depends": [],
+        "default": True}
 
 
 
