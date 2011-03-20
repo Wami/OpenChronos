@@ -98,8 +98,11 @@ typedef union
     u16 up      	: 1;    // Short UP button press
     u16 down      	: 1;    // Short DOWN button press
     u16 backlight  	: 1;    // Short BACKLIGHT button press
-    u16 star_long   : 1;    // Long STAR button press
+    u16 star_long   	: 1;    // Long STAR button press
     u16 num_long   	: 1;    // Long NUM button press
+    u16 up_long   	: 1;    // Long UP button press
+    u16 down_long   	: 1;    // Long DOWN button press
+    u16 backlight_long   	: 1;    // Long BACKLIGHT button press
   } flag;
   u16 all_flags;            // Shortcut to all display flags (for reset)
 } s_button_flags;
@@ -108,7 +111,10 @@ extern volatile s_button_flags button;
 struct struct_button
 {
 	u8  star_timeout;		 
-	u8  num_timeout;		 
+	u8  num_timeout;
+	u8  up_timeout;		 
+	u8  down_timeout;
+	u8  bbacklight_timeout;		 		 
 	u8 backlight_timeout;
 	u8 backlight_status;
 	s16 repeats;			

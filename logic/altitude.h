@@ -50,6 +50,7 @@ extern void stop_altitude_measurement(void);
 extern void do_altitude_measurement(u8 filter);
 
 // menu functions
+extern void ax_altitude(u8 line);
 extern void sx_altitude(u8 line);
 extern void mx_altitude(u8 line);
 extern void display_altitude(u8 line, u8 update);

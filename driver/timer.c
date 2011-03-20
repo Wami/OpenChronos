@@ -572,6 +572,54 @@ __interrupt void TIMER0_A0_ISR(void)
 		{
 			sButton.num_timeout = 0;
 		}
+
+		if (BUTTON_UP_IS_PRESSED) 	
+		{
+			sButton.up_timeout++;
+		
+			// Check if button was held low for some seconds
+			if (sButton.up_timeout > LEFT_BUTTON_LONG_TIME) 
+			{
+				button.flag.up_long = 1;
+				sButton.up_timeout = 0;
+			}
+		}
+		else
+		{
+			sButton.up_timeout = 0;
+		}
+
+		if (BUTTON_DOWN_IS_PRESSED) 	
+		{
+			sButton.down_timeout++;
+		
+			// Check if button was held low for some seconds
+			if (sButton.down_timeout > LEFT_BUTTON_LONG_TIME) 
+			{
+				button.flag.down_long = 1;
+				sButton.down_timeout = 0;
+			}
+		}
+		else
+		{
+			sButton.down_timeout = 0;
+		}
+
+		if (BUTTON_BACKLIGHT_IS_PRESSED) 	
+		{
+			sButton.bbacklight_timeout++;
+		
+			// Check if button was held low for some seconds
+			if (sButton.bbacklight_timeout > LEFT_BUTTON_LONG_TIME) 
+			{
+				button.flag.backlight_long = 1;
+				sButton.bbacklight_timeout = 0;
+			}
+		}
+		else
+		{
+			sButton.bbacklight_timeout = 0;
+		}
 	}
 	
 	// Exit from LPM3 on RETI
