@@ -292,11 +292,23 @@ __interrupt void PORT2_ISR(void)
 			// Filter bouncing noise 
 			if (BUTTON_BACKLIGHT_IS_PRESSED)
 			{
-				sButton.backlight_status = 1;
-				sButton.backlight_timeout = 0;
+                                sButton.backlight_status = 1;
 				P2OUT |= BUTTON_BACKLIGHT_PIN;
 				P2DIR |= BUTTON_BACKLIGHT_PIN;
-				button.flag.backlight = 1;
+				//button.flag.backlight = 1;
+                                           
+				// Additional debounce delay to enable safe high detection 
+		                Timer0_A4_Delay(CONV_MS_TO_TICKS(500u));
+                                
+                                if(BUTTON_BACKLIGHT_IS_PRESSED)
+                                {
+                                  	sButton.backlight_timeout = BACKLIGHT_CONST_TIME_ON;
+                                        //button.flag.backlight_long=0;
+                                }
+                                else
+                                        sButton.backlight_timeout = BACKLIGHT_TIME_ON;
+                                
+
 			}
 		}	
 	}

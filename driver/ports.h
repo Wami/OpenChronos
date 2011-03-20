@@ -82,6 +82,7 @@
 
 // Backlight time  (sec)
 #define BACKLIGHT_TIME_ON		(3u)
+#define BACKLIGHT_CONST_TIME_ON		(1800u) //30 min
 
 // Leave set_value() function after some seconds of user inactivity
 #define INACTIVITY_TIME			(30u)
