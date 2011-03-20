@@ -477,20 +477,20 @@ display_vario( u8 line, u8 update )
 	  }
 
 	_display_l2_clean();
-	// Pulse the vario heartbeat indicator.
-
-	#if VARIO_BLANK
-	if(G_vario.view_mode!=VARIO_VIEWMODE_BLANK)
-	{
-		++_vbeat;
-		display_symbol( LCD_ICON_RECORD, ( _vbeat & 1 ) ? SEG_ON : SEG_OFF );
-	}
-	else
-		display_symbol( LCD_ICON_RECORD,  SEG_OFF );
-	#else
-	++_vbeat;
-	display_symbol( LCD_ICON_RECORD, ( _vbeat & 1 ) ? SEG_ON : SEG_OFF );
-	#endif
+//	// Pulse the vario heartbeat indicator.
+//
+//	#if VARIO_BLANK
+//	if(G_vario.view_mode!=VARIO_VIEWMODE_BLANK)
+//	{
+//		++_vbeat;
+//		display_symbol( LCD_ICON_RECORD, ( _vbeat & 1 ) ? SEG_ON : SEG_OFF );
+//	}
+//	else
+//		display_symbol( LCD_ICON_RECORD,  SEG_OFF );
+//	#else
+//	++_vbeat;
+//	display_symbol( LCD_ICON_RECORD, ( _vbeat & 1 ) ? SEG_ON : SEG_OFF );
+//	#endif
 	
 	// Now see what value to display.
 
