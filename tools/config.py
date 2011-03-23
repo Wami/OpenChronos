@@ -23,7 +23,7 @@ DATA = SortedDict()
 DATA["CONFIG_FREQUENCY"] = {
         "name": "Frequency",
         "depends": [],
-        "default": 902,
+        "default": 868,
         "type": "choices",
         "values": [902, 868, 433],
         "help": "Radio frequency for the clock"
@@ -42,7 +42,7 @@ DATA["OPTION_TIME_DISPLAY"] = {
 DATA["CONFIG_METRIC_ONLY"] = {
         "name": "Metric only code (-286 bytes)",
         "depends": [],
-        "default": False,
+        "default": True,
         "help": "Only add code for Metric units (meter/celsius) to reduce image size",
 }
 
@@ -121,7 +121,7 @@ DATA["DONT_USE_FILTER_FOR_VARIO"] = {
 DATA["CONFIG_ROUND_ALT"] = {
         "name": "Round altitude when higher than 1000m",
         "depends": [],
-        "default": True}
+        "default": False}
 
 
 
@@ -159,7 +159,7 @@ DATA["CONFIG_ALTITUDE"] = {
 DATA["CONFIG_VARIO"] = {
         "name": "Combined with alti, gives vertical speed (478 bytes)",
         "depends": [],
-        "default": False}
+        "default": True}
 
 DATA["CONFIG_PROUT"] = {
         "name": "Simple example that displays a text (238 bytes)",
@@ -224,7 +224,7 @@ DATA["CONFIG_RFBSL"] = {
 DATA["CONFIG_STOP_WATCH"] = {
         "name": "Stop Watch (1202 bytes)",
         "depends": [],
-        "default": True}
+        "default": False}
 DATA["CONFIG_TEMP"] = {
         "name": "Temperature",
         "depends": [],
