@@ -1,4 +1,12 @@
+https://github.com/Wami/OpenChronos
+This fork is the adaptation of the OpenChronos for skydiving.
 
+Changelog and compilation instructions can be found on Wiki pages.
+https://github.com/Wami/OpenChronos/wiki
+
+
+
+====================================================================================
 This fork adds a variometer, an instrument indicating vertical speed,
 essentially for use in free flight (paragliding, hang gliding, ...).
 
