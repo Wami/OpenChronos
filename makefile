@@ -1,8 +1,8 @@
 
 # MSP430		(Texas Instruments)
 CPU	= MSP430
-CC  = msp430-gcc
-LD  = msp430-ld
+CC  = msp430-gcc  -Xlinker /opt/msp430-gcc-4.4.5/msp430/lib/libm.a -Xlinker /opt/msp430-gcc-4.4.5/msp430/lib/libfp.a 
+LD  = msp430-ld -lm
 PYTHON = python
 
 PROJ_DIR	=.

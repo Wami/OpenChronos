@@ -39,6 +39,8 @@
 // *************************************************************************************************
 // Include section
 
+// math	
+#include "math.h"
 
 // system
 #include "project.h"
@@ -603,7 +605,7 @@ s16 conv_pa_to_meter(u32 p_meas, u16 t_meas)
     volatile float rawAltitude;
     volatile float fl_p_meas;
     volatile float pressureFactor = 1/5.25588;
-    fl_p_meas = (float) p_meas;  
+    fl_p_meas = (float) p_meas;   
     rawAltitude = 44330 * (1 - pow((fl_p_meas/101325.0), pressureFactor));
     h=(s16)rawAltitude;
     return (h);
